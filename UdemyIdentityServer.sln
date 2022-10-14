@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyIdentityServer.AuthServer", "UdemyIdentityServer.AuthServer\UdemyIdentityServer.AuthServer.csproj", "{5DA52FFF-93A3-44D0-8E8C-1CE29378D518}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyIdentityServer.Client2", "UdemyIdentityServer.Client2\UdemyIdentityServer.Client2.csproj", "{0D820875-4702-449A-B2DD-0E880B43A6F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyIdentityServer.API1", "UdemyIdentityServer.API1\UdemyIdentityServer.API1.csproj", "{7BEBC9FB-D75A-4559-AC0B-FA1AA65385DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyIdentityServer.API2", "UdemyIdentityServer.API2\UdemyIdentityServer.API2.csproj", "{B0587428-259C-49C8-98F4-D540D25B434F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8493B08F-4D4D-4C22-BB65-BB5929732ADB}"
+	ProjectSection(SolutionItems) = preProject
+		Portlar.txt = Portlar.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyIdentityServer.Client1", "UdemyIdentityServer.Client1\UdemyIdentityServer.Client1.csproj", "{8BE4205D-99C4-46C1-98DF-88397D51AB2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DA52FFF-93A3-44D0-8E8C-1CE29378D518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DA52FFF-93A3-44D0-8E8C-1CE29378D518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DA52FFF-93A3-44D0-8E8C-1CE29378D518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DA52FFF-93A3-44D0-8E8C-1CE29378D518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D820875-4702-449A-B2DD-0E880B43A6F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D820875-4702-449A-B2DD-0E880B43A6F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D820875-4702-449A-B2DD-0E880B43A6F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D820875-4702-449A-B2DD-0E880B43A6F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BEBC9FB-D75A-4559-AC0B-FA1AA65385DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BEBC9FB-D75A-4559-AC0B-FA1AA65385DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BEBC9FB-D75A-4559-AC0B-FA1AA65385DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BEBC9FB-D75A-4559-AC0B-FA1AA65385DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0587428-259C-49C8-98F4-D540D25B434F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0587428-259C-49C8-98F4-D540D25B434F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0587428-259C-49C8-98F4-D540D25B434F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0587428-259C-49C8-98F4-D540D25B434F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE4205D-99C4-46C1-98DF-88397D51AB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE4205D-99C4-46C1-98DF-88397D51AB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE4205D-99C4-46C1-98DF-88397D51AB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE4205D-99C4-46C1-98DF-88397D51AB2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F57972D1-120A-49B7-9007-6FE54903BCF5}
+	EndGlobalSection
+EndGlobal
