@@ -12,11 +12,14 @@ namespace UdemyIdentityServer.AuthServer
             {
                 new ApiResource("resource_api1")
                 {
-                    Scopes={ "api1.read","api1.write","api1.update"}
+                    Scopes={ "api1.read","api1.write","api1.update"},
+                    ApiSecrets= new []{new Secret("secretapi1".Sha256())}
+
                 },
                 new ApiResource("resource_api2")
                 {
-                    Scopes={ "api2.read","api2.write","api2.update"}
+                    Scopes={ "api2.read","api2.write","api2.update"},
+                     ApiSecrets= new []{new Secret("secretapi2".Sha256())}
                 },
 
             };
@@ -45,7 +48,7 @@ namespace UdemyIdentityServer.AuthServer
                     ClientName="Client 1 app uygulaması",
                     ClientSecrets=new[]{new Secret("secret".Sha256())   },
                     AllowedGrantTypes= GrantTypes.ClientCredentials,
-                    AllowedScopes={"api1.read","api2.write","api2.update" }
+                    AllowedScopes={"api1.read"}
                 },
                  new Client()
                  {
@@ -53,7 +56,7 @@ namespace UdemyIdentityServer.AuthServer
                     ClientName="Client 2 app uygulaması",
                     ClientSecrets=new[]{new Secret("secret".Sha256())   },
                     AllowedGrantTypes= GrantTypes.ClientCredentials,
-                    AllowedScopes={"api1.read","api2.write","api2.update" }
+                    AllowedScopes={"api1.read","api1.update","api2.write","api2.update" }
                  }
             };
         }
