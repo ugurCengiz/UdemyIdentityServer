@@ -1,5 +1,8 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4;
+using IdentityServer4.Models;
+using IdentityServer4.Test;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace UdemyIdentityServer.AuthServer
 {
@@ -50,16 +53,62 @@ namespace UdemyIdentityServer.AuthServer
                     AllowedGrantTypes= GrantTypes.ClientCredentials,
                     AllowedScopes={"api1.read"}
                 },
-                 new Client()
-                 {
+
+                new Client()
+                {
                     ClientId="Client2",
                     ClientName="Client 2 app uygulaması",
                     ClientSecrets=new[]{new Secret("secret".Sha256())   },
                     AllowedGrantTypes= GrantTypes.ClientCredentials,
                     AllowedScopes={"api1.read","api1.update","api2.write","api2.update" }
-                 }
+                },
+
+                new Client()
+                {
+                     ClientId="Client1-Mvc",
+                     RequirePkce=false,
+                    ClientName="Client 1 Mvc uygulaması",
+                    ClientSecrets=new[]{new Secret("secret".Sha256())   },
+                    AllowedGrantTypes=GrantTypes.Hybrid,
+                    RedirectUris=new List<string>{"https://localhost:5006/signin-oidc"},
+                    AllowedScopes={IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile}
+                }
             };
         }
+
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>()
+            {
+
+                new IdentityResources.OpenId(),//subId
+                new IdentityResources.Profile(),
+            };
+        }
+
+
+        public static IEnumerable<TestUser> GetUsers()
+        {
+            return new List<TestUser>()
+            {
+                new TestUser{SubjectId="1",Username="fcakiroglu16",Password="password",Claims=new List<Claim>()
+                {
+                    new Claim("given_name","Fatih"),
+                    new Claim("family_name","Çakıroğlu")
+                }},
+
+
+                new TestUser{SubjectId="2",Username="ahmet16",Password="password",Claims=new List<Claim>()
+                {
+                    new Claim("given_name","Ahmet"),
+                    new Claim("family_name","Çakıroğlu")
+                }}
+
+
+
+            };
+        }
+
     }
 }
 
