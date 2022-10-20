@@ -1,6 +1,7 @@
 ﻿using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -71,7 +72,23 @@ namespace UdemyIdentityServer.AuthServer
                     ClientSecrets=new[]{new Secret("secret".Sha256())   },
                     AllowedGrantTypes=GrantTypes.Hybrid,
                     RedirectUris=new List<string>{"https://localhost:5006/signin-oidc"},
-                    AllowedScopes={IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile}
+                    PostLogoutRedirectUris= new List<string>{"https://localhost:5006/signout-callback-oidc" },
+                    AllowedScopes={IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile,"api1.read",
+                    IdentityServerConstants.StandardScopes.OfflineAccess},
+
+                    AccessTokenLifetime= 2*60*60,
+
+                    AllowOfflineAccess =true,
+
+                    RefreshTokenUsage=TokenUsage.ReUse,
+                    RefreshTokenExpiration=TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds,
+
+                    RequireConsent=true,
+
+                    
+
+                    
                 }
             };
         }
