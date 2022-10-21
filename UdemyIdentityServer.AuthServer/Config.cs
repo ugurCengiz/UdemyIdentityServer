@@ -74,7 +74,7 @@ namespace UdemyIdentityServer.AuthServer
                     RedirectUris=new List<string>{"https://localhost:5006/signin-oidc"},
                     PostLogoutRedirectUris= new List<string>{"https://localhost:5006/signout-callback-oidc" },
                     AllowedScopes={IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile,"api1.read",
-                    IdentityServerConstants.StandardScopes.OfflineAccess},
+                    IdentityServerConstants.StandardScopes.OfflineAccess,"CountryAndCity","Roles"},
 
                     AccessTokenLifetime= 2*60*60,
 
@@ -84,11 +84,38 @@ namespace UdemyIdentityServer.AuthServer
                     RefreshTokenExpiration=TokenExpiration.Absolute,
                     AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds,
 
-                    RequireConsent=true,
+                    RequireConsent=false,
 
                     
 
                     
+                },
+
+                 new Client()
+                {
+                     ClientId="Client2-Mvc",
+                     RequirePkce=false,
+                    ClientName="Client 2 Mvc uygulaması",
+                    ClientSecrets=new[]{new Secret("secret".Sha256())   },
+                    AllowedGrantTypes=GrantTypes.Hybrid,
+                    RedirectUris=new List<string>{"https://localhost:5011/signin-oidc"},
+                    PostLogoutRedirectUris= new List<string>{"https://localhost:5011/signout-callback-oidc" },
+                    AllowedScopes={IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile,"api1.read","api2.read",
+                    IdentityServerConstants.StandardScopes.OfflineAccess,"CountryAndCity","Roles"},
+
+                    AccessTokenLifetime= 2*60*60,
+
+                    AllowOfflineAccess =true,
+
+                    RefreshTokenUsage=TokenUsage.ReUse,
+                    RefreshTokenExpiration=TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds,
+
+                    RequireConsent=false,
+
+
+
+
                 }
             };
         }
@@ -100,6 +127,14 @@ namespace UdemyIdentityServer.AuthServer
 
                 new IdentityResources.OpenId(),//subId
                 new IdentityResources.Profile(),
+                new IdentityResource()
+                {
+                    Name="CountryAndCity",DisplayName="Country and City",Description="Kullanıcının ülke ve şehir bilgisi",UserClaims=new[]{"country","city"}
+                },
+                new IdentityResource()
+                {
+                    Name="Roles",DisplayName="Roles", Description="Kullanıcı rolleri",UserClaims=new []{"role"}
+                }
             };
         }
 
@@ -111,14 +146,20 @@ namespace UdemyIdentityServer.AuthServer
                 new TestUser{SubjectId="1",Username="fcakiroglu16",Password="password",Claims=new List<Claim>()
                 {
                     new Claim("given_name","Fatih"),
-                    new Claim("family_name","Çakıroğlu")
+                    new Claim("family_name","Çakıroğlu"),                    
+                    new Claim("country","Türkiye"),
+                    new Claim("city","Ankara"),
+                    new Claim("role","admin")
                 }},
 
 
                 new TestUser{SubjectId="2",Username="ahmet16",Password="password",Claims=new List<Claim>()
                 {
                     new Claim("given_name","Ahmet"),
-                    new Claim("family_name","Çakıroğlu")
+                    new Claim("family_name","Çakıroğlu"),
+                    new Claim("country","Türkiye"),
+                    new Claim("city","İstabul"),
+                    new Claim("role","customer")
                 }}
 
 

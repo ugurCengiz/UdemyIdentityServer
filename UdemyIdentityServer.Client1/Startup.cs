@@ -1,13 +1,16 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UdemyIdentityServer.Client1.Services;
 
 namespace UdemyIdentityServer.Client1
 {
@@ -24,14 +27,19 @@ namespace UdemyIdentityServer.Client1
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddHttpContextAccessor();
+            services.AddScoped<IApiResourceHttpClient,ApiResourceHttpClient>();
+
+
             services.AddAuthentication(opts =>
             {
                 opts.DefaultScheme = "Cookies";
                 opts.DefaultChallengeScheme = "oidc";
 
-
-
-            }).AddCookie("Cookies").AddOpenIdConnect("oidc", opts =>
+            }).AddCookie("Cookies", opts =>
+            {
+                opts.AccessDeniedPath = "/Home/AccessDenied";
+            }).AddOpenIdConnect("oidc", opts =>
             {
 
                 opts.SignInScheme = "Cookies";
@@ -43,6 +51,19 @@ namespace UdemyIdentityServer.Client1
                 opts.SaveTokens=true;
                 opts.Scope.Add("api1.read");
                 opts.Scope.Add("offline_access");
+                opts.Scope.Add("CountryAndCity");
+                opts.Scope.Add("Roles");
+               
+                opts.ClaimActions.MapUniqueJsonKey("country", "country");
+                opts.ClaimActions.MapUniqueJsonKey("city", "city");
+                opts.ClaimActions.MapUniqueJsonKey("role", "role");
+
+                opts.TokenValidationParameters = new TokenValidationParameters
+                {
+                    RoleClaimType="role"
+           
+                };
+
 
             });
 
