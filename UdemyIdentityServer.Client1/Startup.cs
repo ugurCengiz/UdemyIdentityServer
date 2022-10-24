@@ -70,7 +70,6 @@ namespace UdemyIdentityServer.Client1
             });
 
 
-
             services.AddControllersWithViews();
         }
 

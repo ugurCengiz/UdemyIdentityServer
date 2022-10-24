@@ -116,7 +116,21 @@ namespace UdemyIdentityServer.AuthServer
 
 
 
-                }
+                },
+
+                 new Client()
+                 {
+                     ClientId="js-client",
+                     RequireClientSecret=false,
+                      AllowedGrantTypes=GrantTypes.Code,
+                     ClientName="Js Client (Angular)",
+                     AllowedScopes ={IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile,IdentityServerConstants.StandardScopes.Email, "api1.read",
+                     IdentityServerConstants.StandardScopes.OfflineAccess,"CountryAndCity","Roles"},
+                     RedirectUris={"http://localhost:4200/callback" },
+                     AllowedCorsOrigins={ "http://localhost:4200" },
+                     PostLogoutRedirectUris={"http://localhost:4200" }                    
+
+                 }
             };
         }
 
