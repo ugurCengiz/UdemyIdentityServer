@@ -37,6 +37,7 @@ namespace UdemyIdentityServer.Client1.Controllers
 
         public async Task<IActionResult> GetRefreshToken()
         {
+            
             HttpClient httpClient = new HttpClient();
             var disco = await httpClient.GetDiscoveryDocumentAsync("https://localhost:5001");
 

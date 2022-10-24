@@ -73,7 +73,7 @@ namespace UdemyIdentityServer.AuthServer
                     AllowedGrantTypes=GrantTypes.Hybrid,
                     RedirectUris=new List<string>{"https://localhost:5006/signin-oidc"},
                     PostLogoutRedirectUris= new List<string>{"https://localhost:5006/signout-callback-oidc" },
-                    AllowedScopes={IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile,"api1.read",
+                    AllowedScopes={IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile,"api1.read",
                     IdentityServerConstants.StandardScopes.OfflineAccess,"CountryAndCity","Roles"},
 
                     AccessTokenLifetime= 2*60*60,
@@ -124,7 +124,7 @@ namespace UdemyIdentityServer.AuthServer
         {
             return new List<IdentityResource>()
             {
-
+                new IdentityResources.Email(),
                 new IdentityResources.OpenId(),//subId
                 new IdentityResources.Profile(),
                 new IdentityResource()
