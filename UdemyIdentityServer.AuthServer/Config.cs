@@ -86,13 +86,13 @@ namespace UdemyIdentityServer.AuthServer
 
                     RequireConsent=false,
 
-                    
 
-                    
+
+
                 },
 
-                 new Client()
-                {
+                new Client()
+                 {
                      ClientId="Client2-Mvc",
                      RequirePkce=false,
                     ClientName="Client 2 Mvc uygulaması",
@@ -116,9 +116,9 @@ namespace UdemyIdentityServer.AuthServer
 
 
 
-                },
+                 },
 
-                 new Client()
+                new Client()
                  {
                      ClientId="js-client",
                      RequireClientSecret=false,
@@ -128,9 +128,33 @@ namespace UdemyIdentityServer.AuthServer
                      IdentityServerConstants.StandardScopes.OfflineAccess,"CountryAndCity","Roles"},
                      RedirectUris={"http://localhost:4200/callback" },
                      AllowedCorsOrigins={ "http://localhost:4200" },
-                     PostLogoutRedirectUris={"http://localhost:4200" }                    
+                     PostLogoutRedirectUris={"http://localhost:4200" }
 
-                 }
+                 },
+
+                new Client()
+                {
+                     ClientId="Client1-ResourceOwner-Mvc",
+                    ClientName="Client 1 Mvc uygulaması",
+                    ClientSecrets=new[]{new Secret("secret".Sha256())   },
+                    AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes={IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile,"api1.read",
+                    IdentityServerConstants.StandardScopes.OfflineAccess,"CountryAndCity","Roles"},
+
+                    AccessTokenLifetime= 2*60*60,
+
+                    AllowOfflineAccess =true,
+
+                    RefreshTokenUsage=TokenUsage.ReUse,
+                    RefreshTokenExpiration=TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds,
+
+
+
+
+
+
+                },
             };
         }
 
@@ -160,7 +184,7 @@ namespace UdemyIdentityServer.AuthServer
                 new TestUser{SubjectId="1",Username="fcakiroglu16",Password="password",Claims=new List<Claim>()
                 {
                     new Claim("given_name","Fatih"),
-                    new Claim("family_name","Çakıroğlu"),                    
+                    new Claim("family_name","Çakıroğlu"),
                     new Claim("country","Türkiye"),
                     new Claim("city","Ankara"),
                     new Claim("role","admin")

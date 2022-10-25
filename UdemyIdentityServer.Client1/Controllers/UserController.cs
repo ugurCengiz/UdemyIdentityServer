@@ -28,16 +28,18 @@ namespace UdemyIdentityServer.Client1.Controllers
             return View();
         }
 
-        public async Task LogOut()
+        public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync("Cookies");
-            await HttpContext.SignOutAsync("oidc");
+            return RedirectToAction("Index", "Home");
+
+            // await HttpContext.SignOutAsync("oidc");
         }
 
 
         public async Task<IActionResult> GetRefreshToken()
         {
-            
+
             HttpClient httpClient = new HttpClient();
             var disco = await httpClient.GetDiscoveryDocumentAsync("https://localhost:5001");
 
@@ -85,7 +87,7 @@ namespace UdemyIdentityServer.Client1.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles ="admin")]
+        [Authorize(Roles = "admin")]
         public IActionResult AdminAction()
         {
             return View();

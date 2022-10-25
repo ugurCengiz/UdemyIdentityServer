@@ -39,7 +39,8 @@ namespace UdemyIdentityServer.AuthServer
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 //.AddTestUsers(Config.GetUsers().ToList())
                 .AddDeveloperSigningCredential()
-                .AddProfileService<CustomerProfileService>();
+                .AddProfileService<CustomerProfileService>()
+                .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>();
 
             services.AddControllersWithViews();
         }
