@@ -30,7 +30,6 @@ namespace UdemyIdentityServer.Client1
             services.AddHttpContextAccessor();
             services.AddScoped<IApiResourceHttpClient,ApiResourceHttpClient>();
 
-
             services.AddAuthentication(opts =>
             {
                 opts.DefaultScheme = "Cookies";

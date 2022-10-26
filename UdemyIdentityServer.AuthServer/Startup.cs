@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using UdemyIdentityServer.AuthServer.Models;
 using UdemyIdentityServer.AuthServer.Repository;
@@ -27,16 +28,29 @@ namespace UdemyIdentityServer.AuthServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ICustomUserRepository, CustomUserRepository>(); 
+            services.AddScoped<ICustomUserRepository, CustomUserRepository>();
             services.AddDbContext<CustomDbContext>(option =>
             {
                 option.UseSqlServer(Configuration.GetConnectionString("LocalDb"));
             });
 
-            services.AddIdentityServer().AddInMemoryApiResources(Config.GetApýResource())
-                .AddInMemoryApiScopes(Config.GetApýScopes())
-                .AddInMemoryClients(Config.GetClients())
-                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+            string assemblyName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
+
+            services.AddIdentityServer()
+                .AddConfigurationStore(opts =>
+                {
+                    opts.ConfigureDbContext = c => c.UseSqlServer(Configuration.GetConnectionString("LocalDb"), sqlopts => sqlopts.MigrationsAssembly(assemblyName));
+
+                })
+                .AddOperationalStore(opts => {
+                    opts.ConfigureDbContext = c => c.UseSqlServer(Configuration.GetConnectionString("LocalDb"), sqlopts => sqlopts.MigrationsAssembly(assemblyName));
+
+                })
+                //.AddInMemoryApiResources(Config.GetApýResource())
+                //.AddInMemoryApiScopes(Config.GetApýScopes())
+                //.AddInMemoryClients(Config.GetClients())
+                //.AddInMemoryIdentityResources(Config.GetIdentityResources())
                 //.AddTestUsers(Config.GetUsers().ToList())
                 .AddDeveloperSigningCredential()
                 .AddProfileService<CustomerProfileService>()
